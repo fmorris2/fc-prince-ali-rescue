@@ -1,0 +1,7 @@
+Prince Ali Rescue Settings:
+	Start Quest:
+	Talk to Hassan (0) (Center Tile: (3298,3163,0), Radius: 12)
+		-SETTING 273 CHANGES FROM 0 TO 10
+	Talk to Osman (0,1,2) (Center Tile: (3286,3181,0), Radius: 5)
+		-On first option selection, SETTING 273 CHANGES FROM 10 TO 20
+	
