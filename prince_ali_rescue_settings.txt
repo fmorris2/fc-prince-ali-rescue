@@ -4,4 +4,81 @@ Prince Ali Rescue Settings:
 		-SETTING 273 CHANGES FROM 0 TO 10
 	Talk to Osman (0,1,2) (Center Tile: (3286,3181,0), Radius: 5)
 		-On first option selection, SETTING 273 CHANGES FROM 10 TO 20
+	Talk to Leela (0,1,2) (Center Tile: (3112,3261,0), Radius: 10)
+		-(this might be able to be skipped? No settings change)
+	Talk to Ned (0,1,0) (Center Tile: (3099,3258,0), Radius: 6)
+		Requirements:
+			-3 x Ball of wool
+		-Requirements disappear from inventory
+		-Wig (2421) appears in inventory
+	Dye Wig
+		Requirements:
+			Yellow dye (1765)
+			Wig (2421)
+		-Requirements disappear from inventory
+		-Yellow Wig appears in inventory (2419)
+	Talk to Aggie (0,0) (Center Tile: (3086,3258,0), Radius: 5)
+		Requirements:
+			Redberries (1951)
+			Ashes (592)
+			Pot of flour (1933)
+			Bucket of  water (1929)
+		-Requirements disappear from inventory
+		-Paste (2424) appears in inventory
+	Talk to Lady Keli (0,1,0,1,0,0) (Center Tile: (3127,3244,0), Radius: 6)
+		Pre-conditions:
+			May want to bank all items except requirements due to the jail guards
+		Requirements:
+			Soft clay (1761)
+		-Requirements disappear from inventory
+		-Key print (2423) appears in inventory
+	Talk to Osman (0)
+		WARNING:
+			SINCE THERE IS NO SETTING CHANGE, THE ONLY WAY TO KNOW IF
+			WE'VE ALREADY DONE THIS STAGE IS TO EITHER CHECK THE QUEST JOURNAL "I have duplicated a key, I need to get it from Leela"
+			OR INTERPRET OSMAN'S DIALOGUE "You can collect the key from Leela."
+		Requirements:
+			Key print
+			Bronze bar (2349)
+		-Requirements disappear from inventory
+	Talk to Leela ()
+		-Bronze key (2418) appears in inventory
+		-SETTING 273 CHANGES FROM 20 TO 30
+	Talk to Joe (0) (Center Tile: (3126,3245,0), Radius: 7)
+		-Requirements:
+			3 x Beer (1917)
+		SETTING 273 CHANGES FROM 30 TO 31 ON FIRST BEER DRANK
+		SETTING 273 CHANGES FROM 31 TO 40 ON LAST 2 BEERS DRANK
+		Requirements disappear from inventory
+	Use Rope on Lady Keli
+		-Requirements:
+			Rope (954)
+		Go through dialogue
+		Requirements disappear from inventory
+		SETTING 273 CHANGES FROM 40 TO 50
+	Open Prison Door
+		-Requirements:
+			Bronze key (2418)
+			Pink skirt (1013)
+			Paste (2424)
+			Wig (2419)
+		Prince Ali is reachable after door is opened
+	Talk to Prince Ali ()
+		-Requirements:
+			Bronze key(2418)
+			Pink skirt (1013)
+			Paste (2424)
+			Wig (2419)
+		SETTING 273 CHANGES FROM 50 TO 100
+	Talk to Hassan
+		SETTING 273 CHANGES FROM 100 TO 110
+	
+		
+		
+		
+			
+	
+		
+		
+	
 	
