@@ -12,6 +12,7 @@ import org.tribot.script.interfaces.Starting;
 import scripts.fc.framework.mission.Mission;
 import scripts.fc.framework.paint.FCPaintable;
 import scripts.fc.framework.script.FCMissionScript;
+import scripts.fc.missions.fc_prince_ali_rescue.FCPrinceAliRescue;
 
 @ScriptManifest(
 	authors     = { 
@@ -27,7 +28,7 @@ public class FCPrinceAliRescueScript extends FCMissionScript implements FCPainta
 	@Override
 	protected Queue<Mission> getMissions()
 	{
-		return new LinkedList<>(Arrays.asList());
+		return new LinkedList<>(Arrays.asList(new FCPrinceAliRescue(this)));
 	}
 
 	@Override

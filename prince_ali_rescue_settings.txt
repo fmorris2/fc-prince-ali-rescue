@@ -8,7 +8,7 @@ Prince Ali Rescue Settings:
 		-(this might be able to be skipped? No settings change)
 	Talk to Ned (0,1,0) (Center Tile: (3099,3258,0), Radius: 6)
 		Requirements:
-			-3 x Ball of wool
+			-3 x Ball of wool (1759)
 		-Requirements disappear from inventory
 		-Wig (2421) appears in inventory
 	Dye Wig
