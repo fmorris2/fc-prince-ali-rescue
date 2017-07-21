@@ -13,11 +13,11 @@ import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARReqs;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARSettings;
 
-public class GetWig extends Task implements ItemsRequiredTask
+public class GetPaste extends Task implements ItemsRequiredTask
 {
-	private static final long serialVersionUID = -2388030595176955841L;
-	private static final Positionable TILE = new RSTile(3099, 3258, 0);
-	private static final int RADIUS = 6;
+	private static final long serialVersionUID = 8132711396112602301L;
+	private static final Positionable TILE = new RSTile(3086, 3258, 0);
+	private static final int RADIUS = 5;
 
 	@Override
 	public boolean execute()
@@ -25,7 +25,7 @@ public class GetWig extends Task implements ItemsRequiredTask
 		if(Player.getPosition().distanceTo(TILE) > RADIUS)
 			return Travel.webWalkTo(TILE, FCConditions.withinDistanceOfTile(TILE, RADIUS));
 		
-		NpcDialogue dialogue = new NpcDialogue("Talk-to", "Ned", 10, 0,1,0);
+		NpcDialogue dialogue = new NpcDialogue("Talk-to", "Aggie", 10, 0,0);
 		dialogue.setCheckPath(true);
 		
 		return dialogue.execute();
@@ -34,24 +34,25 @@ public class GetWig extends Task implements ItemsRequiredTask
 	@Override
 	public boolean shouldExecute()
 	{
-		return PARSettings.GET_WIG.isValid();
+		return PARSettings.GET_PASTE.isValid();
 	}
-
-	@Override
-	public String getStatus()
-	{
-		return "Get wig";
-	}
-
+	
 	@Override
 	public FCItem[] getRequiredItems()
 	{
 		return new FCItem[]
 		{
-			new FCItem(3, false, PARReqs.WOOL)
+			new FCItem(1, false, PARReqs.REDBERRIES),
+			new FCItem(1, false, PARReqs.ASHES),
+			new FCItem(1, false, PARReqs.POT_OF_FLOUR),
+			new FCItem(1, false, PARReqs.BUCKET_OF_WATER)
 		};
 	}
-	
-	
+
+	@Override
+	public String getStatus()
+	{
+		return "Get paste";
+	}
 
 }

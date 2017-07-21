@@ -7,9 +7,15 @@ import scripts.fc.framework.quest.QuestScriptManager;
 import scripts.fc.framework.requirement.Requirement;
 import scripts.fc.framework.script.FCMissionScript;
 import scripts.fc.framework.task.Task;
+import scripts.fc.missions.fc_prince_ali_rescue.data.PARReqs;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARSettings;
+import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.DyeWig;
+import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetKeyPrint;
+import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetPaste;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetWig;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.OsmanFirstDialogue;
+import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.OsmanSecondDialogue;
+import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.PickupKey;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.StartQuest;
 
 public class FCPrinceAliRescue extends QuestScriptManager
@@ -60,13 +66,14 @@ public class FCPrinceAliRescue extends QuestScriptManager
 	@Override
 	public Requirement[] getRequirements()
 	{
-		return new Requirement[]{};
+		return new Requirement[]{new PARReqs(missionScript)};
 	}
 
 	@Override
 	public LinkedList<Task> getTaskList()
 	{
-		return new LinkedList<>(Arrays.asList(new StartQuest(), new OsmanFirstDialogue(), new GetWig()));
+		return new LinkedList<>(Arrays.asList(new StartQuest(), new OsmanFirstDialogue(), new GetWig(), new DyeWig(),
+				new GetPaste(), new GetKeyPrint(), new OsmanSecondDialogue(), new PickupKey()));
 	}
 	
 	public String toString()

@@ -9,6 +9,7 @@ import scripts.fc.framework.quest.InvBankBool.TYPE;
 import scripts.fc.framework.quest.Order;
 import scripts.fc.framework.quest.QuestBool;
 import scripts.fc.framework.quest.QuestJournalBool;
+import scripts.fc.framework.quest.QuestJournalBool.JOURNAL_STATUS;
 import scripts.fc.framework.quest.QuestState;
 import scripts.fc.framework.quest.SettingBool;
 import scripts.fc.missions.fc_prince_ali_rescue.FCPrinceAliRescue;
@@ -36,7 +37,7 @@ public enum PARSettings
 		new QuestState
 		(
 			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.EQUALS),
-			new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "Talk to Leela near Draynor Village for advice.", false, true)
+			new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "Talk to Leela near Draynor Village for advice.", JOURNAL_STATUS.CONTAINS_STRING, true)
 		)
 	),
 	
@@ -48,6 +49,64 @@ public enum PARSettings
 			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
 			.and(new InvBankBool(PARReqs.WIG, 1, TYPE.IN_ONE, false))
 			.and(new InvBankBool(PARReqs.YELLOW_WIG, 1, TYPE.IN_ONE, false))
+		)
+	),
+	
+	DYE_WIG
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
+			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
+			.and(new InvBankBool(PARReqs.WIG, 1, TYPE.IN_ONE, true))
+			.and(new InvBankBool(PARReqs.YELLOW_WIG, 1, TYPE.IN_ONE, false))
+		)
+	),
+	
+	GET_PASTE
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
+			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
+			.and(new InvBankBool(PARReqs.PASTE, 1, TYPE.IN_ONE, false))
+		)
+	),
+	
+	GET_KEY_PRINT
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
+			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
+			.and(new InvBankBool(PARReqs.KEY_PRINT, 1, TYPE.IN_ONE, false))
+			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, false))
+			.and(new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
+					JOURNAL_STATUS.CONTAINS_STRING, false))
+		)
+	),
+	
+	OSMAN_SECOND_DIALOGUE
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
+			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
+			.and(new InvBankBool(PARReqs.KEY_PRINT, 1, TYPE.IN_ONE, true))
+			.and(new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
+					JOURNAL_STATUS.CONTAINS_STRING, false))
+		)
+	),
+	
+	PICKUP_KEY
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
+			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
+			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, false))
+			.and(new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
+					JOURNAL_STATUS.CONTAINS_STRING, true))
 		)
 	),
 	
