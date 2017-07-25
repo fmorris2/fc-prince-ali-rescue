@@ -5,12 +5,15 @@ import org.tribot.api.Timing;
 import scripts.fc.api.generic.FCConditions;
 import scripts.fc.api.interaction.impl.items.ItemOnItem;
 import scripts.fc.api.items.FCItem;
+import scripts.fc.framework.data.Vars;
+import scripts.fc.framework.task.FutureTaskPreparer;
 import scripts.fc.framework.task.ItemsRequiredTask;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARReqs;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARSettings;
+import scripts.fc.missions.fc_prince_ali_rescue.data.PARTasks;
 
-public class DyeWig extends Task implements ItemsRequiredTask
+public class DyeWig extends Task implements ItemsRequiredTask, FutureTaskPreparer
 {
 	private static final long serialVersionUID = -5732258651562461413L;
 
@@ -40,5 +43,12 @@ public class DyeWig extends Task implements ItemsRequiredTask
 			new FCItem(1, false, PARReqs.WIG),
 			new FCItem(1, false, PARReqs.DYE)
 		};
+	}
+
+	@Override
+	public ItemsRequiredTask[] getFutureTasks()
+	{
+		PARTasks tasks = Vars.get().get("tasks");
+		return new ItemsRequiredTask[]{tasks.GET_PASTE};
 	}
 }

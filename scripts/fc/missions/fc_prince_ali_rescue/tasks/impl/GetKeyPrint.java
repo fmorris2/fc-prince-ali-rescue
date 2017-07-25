@@ -1,79 +1,60 @@
 package scripts.fc.missions.fc_prince_ali_rescue.tasks.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.tribot.api.General;
-import org.tribot.api.interfaces.Positionable;
-import org.tribot.api2007.Combat;
-import org.tribot.api2007.Options;
-import org.tribot.api2007.Player;
-import org.tribot.api2007.types.RSCharacter;
-import org.tribot.api2007.types.RSTile;
-import org.tribot.api2007.util.DPathNavigator;
+import org.tribot.api2007.Inventory;
+import org.tribot.api2007.NPCs;
 
-import scripts.fc.api.generic.FCConditions;
 import scripts.fc.api.interaction.impl.npcs.dialogue.NpcDialogue;
-import scripts.fc.api.interaction.impl.objects.ClickObject;
 import scripts.fc.api.items.FCItem;
-import scripts.fc.api.travel.Travel;
-import scripts.fc.api.wrappers.FCTiming;
+import scripts.fc.api.utils.Utils;
 import scripts.fc.framework.task.ItemsRequiredTask;
 import scripts.fc.framework.task.SpaceRequiredTask;
-import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARReqs;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARSettings;
+import scripts.fc.missions.fc_prince_ali_rescue.tasks.JailTask;
 
-public class GetKeyPrint extends Task implements ItemsRequiredTask, SpaceRequiredTask
+public class GetKeyPrint extends JailTask implements ItemsRequiredTask, SpaceRequiredTask
 {
-	private static final long serialVersionUID = 5883609471833300426L;
-	private static final Positionable TILE = new RSTile(3127, 3244, 0);
-	private static final Positionable ESCAPE_TILE = new RSTile(3124, 3253, 0);
-	private static final int RADIUS = 6;
+	public static final int COMBAT_THRESH = 53;
 	
-	@Override
-	public boolean execute()
+	private static final long serialVersionUID = 5883609471833300426L;
+	
+	public boolean handle()
 	{
-		if(Player.getPosition().distanceTo(TILE) > RADIUS)
-			return Travel.webWalkTo(TILE, FCConditions.withinDistanceOfTile(TILE, RADIUS));
-		
-		if(Combat.isUnderAttack() || Player.getRSPlayer().isInCombat())
-			return escapeCombat();
-		
-		NpcDialogue dialogue = new NpcDialogue("Talk-to", "Lady Keli", 10, 0,1,0,1,0,0);
-		dialogue.setCheckPath(true);
-		
-		return dialogue.execute();
+		return handleInJail();
 	}
 	
-	private boolean escapeCombat()
+	private boolean handleInJail()
 	{
-		General.println("Escaping combat...");
-		Options.setRunOn(true);
-		DPathNavigator dPath = new DPathNavigator();
-		dPath.setStoppingCondition(FCConditions.withinDistanceOfTile(ESCAPE_TILE, 2));
-		if(dPath.traverse(ESCAPE_TILE))
+		General.println("In jail & safe");
+		if(!isKeliInJail() || isJailGuardInJail())
 		{
-			General.println("Successfully walked to escape tile");
-			if(!FCTiming.waitCondition(() -> Combat.getAttackingEntities().length > 0, 6000))
-			{
-				General.println("Successfully avoided combat");
-				return true;
-			}
-			
-			RSCharacter enemy = Arrays.stream(Combat.getAttackingEntities()).findFirst().orElse(null);
-			if(enemy == null)
-				return false;
-			
-			dPath.setStoppingCondition(FCConditions.IN_BUILDING_CONDITION);
-			General.println("Waiting for enemy to get close & running back into building");
-			if(FCTiming.waitCondition(() -> Player.getPosition().distanceTo(enemy) <= 2, 6000)
-					&& dPath.traverse(TILE))
-			{
-				General.println("Closing door!");
-				return new ClickObject("Close", "Door", 3).execute();	
-			}
+			General.println("Needs to hop - Either Keli is not in jail or Jail guard is in jail");
+			hop();
 		}
-		return false;	
+		else
+		{
+			General.println("Talking to keli");
+			NpcDialogue dialogue = new NpcDialogue("Talk-to", "Lady Keli", 10, 0,1,0,1,0,0);
+			dialogue.setCheckPath(true);
+			return dialogue.execute();
+		}
+		
+		return false;
+	}
+	
+	private boolean isKeliInJail()
+	{
+		return Arrays.stream(NPCs.find("Lady Keli")).anyMatch(n -> Utils.isInBuilding(n));
+	}
+	
+	private boolean isJailGuardInJail()
+	{
+		return Arrays.stream(NPCs.find("Jail guard")).anyMatch(n -> Utils.isInBuilding(n));
 	}
 
 	@Override
@@ -85,16 +66,17 @@ public class GetKeyPrint extends Task implements ItemsRequiredTask, SpaceRequire
 	@Override
 	public int getSpaceRequired()
 	{
-		return 27;
+		return 25;
 	}
 
 	@Override
 	public FCItem[] getRequiredItems()
 	{
-		return new FCItem[]
-		{
-			new FCItem(1, false, PARReqs.SOFT_CLAY)
-		};
+		List<FCItem> reqs = new ArrayList<>(Arrays.asList(new FCItem(1, false, PARReqs.SOFT_CLAY)));
+		if(Inventory.getCount("Trout") == 0)
+			reqs.add(new FCItem(2, false, PARReqs.TROUT));
+		
+		return reqs.toArray(new FCItem[reqs.size()]);
 	}
 
 	@Override

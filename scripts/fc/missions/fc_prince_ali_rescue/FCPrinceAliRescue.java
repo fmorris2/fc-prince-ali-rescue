@@ -3,20 +3,14 @@ package scripts.fc.missions.fc_prince_ali_rescue;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import scripts.fc.framework.data.Vars;
 import scripts.fc.framework.quest.QuestScriptManager;
 import scripts.fc.framework.requirement.Requirement;
 import scripts.fc.framework.script.FCMissionScript;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARReqs;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARSettings;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.DyeWig;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetKeyPrint;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetPaste;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetWig;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.OsmanFirstDialogue;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.OsmanSecondDialogue;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.PickupKey;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.StartQuest;
+import scripts.fc.missions.fc_prince_ali_rescue.data.PARTasks;
 
 public class FCPrinceAliRescue extends QuestScriptManager
 {
@@ -72,8 +66,9 @@ public class FCPrinceAliRescue extends QuestScriptManager
 	@Override
 	public LinkedList<Task> getTaskList()
 	{
-		return new LinkedList<>(Arrays.asList(new StartQuest(), new OsmanFirstDialogue(), new GetWig(), new DyeWig(),
-				new GetPaste(), new GetKeyPrint(), new OsmanSecondDialogue(), new PickupKey()));
+		PARTasks tasks = new PARTasks();
+		Vars.get().add("tasks", tasks);
+		return new LinkedList<>(Arrays.asList(tasks.getTasks()));
 	}
 	
 	public String toString()

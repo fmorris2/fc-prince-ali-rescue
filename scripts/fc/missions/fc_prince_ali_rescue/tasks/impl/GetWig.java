@@ -8,12 +8,15 @@ import scripts.fc.api.generic.FCConditions;
 import scripts.fc.api.interaction.impl.npcs.dialogue.NpcDialogue;
 import scripts.fc.api.items.FCItem;
 import scripts.fc.api.travel.Travel;
+import scripts.fc.framework.data.Vars;
+import scripts.fc.framework.task.FutureTaskPreparer;
 import scripts.fc.framework.task.ItemsRequiredTask;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARReqs;
 import scripts.fc.missions.fc_prince_ali_rescue.data.PARSettings;
+import scripts.fc.missions.fc_prince_ali_rescue.data.PARTasks;
 
-public class GetWig extends Task implements ItemsRequiredTask
+public class GetWig extends Task implements ItemsRequiredTask, FutureTaskPreparer
 {
 	private static final long serialVersionUID = -2388030595176955841L;
 	private static final Positionable TILE = new RSTile(3099, 3258, 0);
@@ -50,6 +53,13 @@ public class GetWig extends Task implements ItemsRequiredTask
 		{
 			new FCItem(3, false, PARReqs.WOOL)
 		};
+	}
+
+	@Override
+	public ItemsRequiredTask[] getFutureTasks()
+	{
+		PARTasks tasks = Vars.get().get("tasks");
+		return new ItemsRequiredTask[]{tasks.DYE_WIG, tasks.GET_PASTE};
 	}
 	
 	

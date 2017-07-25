@@ -21,7 +21,8 @@ public abstract class OsmanDialogue extends Task
 		if(Player.getPosition().distanceTo(TILE) > RADIUS)
 			return Travel.webWalkTo(TILE, FCConditions.withinDistanceOfTile(TILE, RADIUS));
 		
-		return new NpcDialogue("Talk-to", "Osman", 10, 0,1,2).execute();
+		NpcDialogue dialogue = new NpcDialogue("Talk-to", "Osman", 10, 0,1,2);
+		return new NpcDialogue("Talk-to", "Osman", 10, 0,1,2).execute() || dialogue.wentThroughDialogue();
 	}
 
 }

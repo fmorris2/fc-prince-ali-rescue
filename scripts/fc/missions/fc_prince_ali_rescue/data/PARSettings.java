@@ -110,6 +110,59 @@ public enum PARSettings
 		)
 	),
 	
+	LEELA_SECOND_DIALOGUE
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.EQUALS)
+			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, true))
+			.and(new InvBankBool(PARReqs.PINK_SKIRT, 1, TYPE.IN_ONE, true))
+			.and(new InvBankBool(PARReqs.YELLOW_WIG, 1, TYPE.IN_ONE, true))
+			.and(new InvBankBool(PARReqs.PASTE, 1, TYPE.IN_ONE, true))
+			.and(new InvBankBool(PARReqs.ROPE, 1, TYPE.IN_ONE, true))
+		)
+	),
+	
+	JOE_FIRST_BEER
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 30, true, Order.EQUALS)
+		)
+	),
+	
+	JOE_LAST_BEERS
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 31, true, Order.EQUALS)
+		)
+	),
+	
+	LASSO_KELI
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 40, true, Order.EQUALS)
+		)
+	),
+	
+	RESCUE_PRINCE
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 50, true, Order.EQUALS)
+		)
+	),
+	
+	TURN_IN_QUEST
+	(
+		new QuestState
+		(
+			new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.EQUALS)
+		)
+	),
+	
 	QUEST_COMPLETE
 	(
 		new QuestState
