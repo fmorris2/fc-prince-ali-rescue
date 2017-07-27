@@ -1,14 +1,11 @@
 package scripts.fc.missions.fc_prince_ali_rescue.data;
 
-import java.util.List;
-
-import scripts.fc.framework.mission.Mission;
 import scripts.fc.framework.quest.CombatLevelBool;
 import scripts.fc.framework.quest.InvBankBool;
 import scripts.fc.framework.quest.InvBankBool.TYPE;
-import scripts.fc.framework.quest.QuestJournalBool.JOURNAL_STATUS;
 import scripts.fc.framework.quest.Order;
 import scripts.fc.framework.quest.QuestJournalBool;
+import scripts.fc.framework.quest.QuestJournalBool.JOURNAL_STATUS;
 import scripts.fc.framework.quest.SettingBool;
 import scripts.fc.framework.requirement.item.ItemRequirement;
 import scripts.fc.framework.requirement.item.ReqItem;
@@ -115,11 +112,4 @@ public class PARReqs extends ItemRequirement
 			)	
 		};
 	}
-
-	@Override
-	public List<Mission> getReqMissions()
-	{
-		return null;
-	}
-
 }
