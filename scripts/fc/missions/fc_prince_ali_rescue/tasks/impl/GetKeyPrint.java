@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.tribot.api.General;
+import org.tribot.api2007.Combat;
 import org.tribot.api2007.Inventory;
 import org.tribot.api2007.NPCs;
 
@@ -25,13 +26,16 @@ public class GetKeyPrint extends JailTask implements ItemsRequiredTask, SpaceReq
 	
 	public boolean handle()
 	{
+		if(Combat.isUnderAttack())
+			return false;
+		
 		return handleInJail();
 	}
 	
 	private boolean handleInJail()
 	{
 		General.println("In jail & safe");
-		if(!isKeliInJail() || isJailGuardInJail())
+		if(!Combat.isUnderAttack() && (!isKeliInJail() || isJailGuardInJail()))
 		{
 			General.println("Needs to hop - Either Keli is not in jail or Jail guard is in jail");
 			hop();
@@ -47,14 +51,9 @@ public class GetKeyPrint extends JailTask implements ItemsRequiredTask, SpaceReq
 		return false;
 	}
 	
-	private boolean isKeliInJail()
+	public static boolean isKeliInJail()
 	{
 		return Arrays.stream(NPCs.find("Lady Keli")).anyMatch(n -> Utils.isInBuilding(n));
-	}
-	
-	private boolean isJailGuardInJail()
-	{
-		return Arrays.stream(NPCs.find("Jail guard")).anyMatch(n -> Utils.isInBuilding(n));
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class GetKeyPrint extends JailTask implements ItemsRequiredTask, SpaceReq
 	{
 		List<FCItem> reqs = new ArrayList<>(Arrays.asList(new FCItem(1, false, PARReqs.SOFT_CLAY)));
 		if(Inventory.getCount("Trout") == 0)
-			reqs.add(new FCItem(2, false, PARReqs.TROUT));
+			reqs.add(new FCItem(2, false, false, PARReqs.TROUT));
 		
 		return reqs.toArray(new FCItem[reqs.size()]);
 	}

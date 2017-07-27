@@ -8,7 +8,6 @@ import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetWig;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.JoeFirstBeer;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.JoeSecondBeer;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.LassoKeli;
-import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.LeelaFirstDialogue;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.LeelaSecondDialogue;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.OsmanFirstDialogue;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.OsmanSecondDialogue;
@@ -21,7 +20,7 @@ public class PARTasks
 {
 	public final StartQuest START_QUEST = new StartQuest();
 	public final OsmanFirstDialogue OSMAN_FIRST_DIALOGUE = new OsmanFirstDialogue();
-	public final LeelaFirstDialogue LEELA_FIRST_DIALOGUE = new LeelaFirstDialogue();
+	//public final LeelaFirstDialogue LEELA_FIRST_DIALOGUE = new LeelaFirstDialogue();
 	public final GetWig GET_WIG = new GetWig();
 	public final DyeWig DYE_WIG = new DyeWig();
 	public final GetPaste GET_PASTE = new GetPaste();
@@ -39,7 +38,7 @@ public class PARTasks
 	{
 		return new Task[]
 		{
-			START_QUEST, OSMAN_FIRST_DIALOGUE, LEELA_FIRST_DIALOGUE, GET_WIG, DYE_WIG, GET_PASTE, GET_KEY_PRINT,
+			START_QUEST, OSMAN_FIRST_DIALOGUE, /*LEELA_FIRST_DIALOGUE,*/ GET_WIG, DYE_WIG, GET_PASTE, GET_KEY_PRINT,
 			OSMAN_SECOND_DIALOGUE, PICKUP_KEY, LEELA_SECOND_DIALOGUE, JOE_FIRST_BEER, JOE_SECOND_BEER, LASSO_KELI,
 			RESCUE_PRINCE, TURN_IN_QUEST
 		};

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.tribot.api.Timing;
+import org.tribot.api2007.Combat;
 import org.tribot.api2007.Inventory;
 
 import scripts.fc.api.generic.FCConditions;
@@ -25,6 +26,9 @@ public class JoeSecondBeer extends JailTask implements ItemsRequiredTask, Future
 	@Override
 	protected boolean handle()
 	{
+		if(Combat.isUnderAttack())
+			return false;
+		
 		int start = Inventory.getAll().length;
 		NpcDialogue dialogue = new NpcDialogue("Talk-to", "Joe", 10, 0,0);
 		dialogue.setIgnoreChatName(true);
@@ -49,7 +53,7 @@ public class JoeSecondBeer extends JailTask implements ItemsRequiredTask, Future
 	{
 		List<FCItem> reqs = new ArrayList<>(Arrays.asList(new FCItem(2, false, PARReqs.BEER)));
 		if(Inventory.getCount("Trout") == 0)
-			reqs.add(new FCItem(2, false, PARReqs.TROUT));
+			reqs.add(new FCItem(2, false, false, PARReqs.TROUT));
 		
 		return reqs.toArray(new FCItem[reqs.size()]);
 	}

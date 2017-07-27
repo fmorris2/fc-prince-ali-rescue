@@ -80,9 +80,10 @@ public enum PARSettings
 			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
 			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
 			.and(new InvBankBool(PARReqs.KEY_PRINT, 1, TYPE.IN_ONE, false))
-			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, false))
-			.and(new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
-					JOURNAL_STATUS.CONTAINS_STRING, false))
+			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, false)),
+			
+			new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
+					JOURNAL_STATUS.CONTAINS_STRING, false)
 		)
 	),
 	
@@ -92,9 +93,10 @@ public enum PARSettings
 		(
 			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
 			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
-			.and(new InvBankBool(PARReqs.KEY_PRINT, 1, TYPE.IN_ONE, true))
-			.and(new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
-					JOURNAL_STATUS.CONTAINS_STRING, false))
+			.and(new InvBankBool(PARReqs.KEY_PRINT, 1, TYPE.IN_ONE, true)),
+			
+			new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
+					JOURNAL_STATUS.CONTAINS_STRING, false)
 		)
 	),
 	
@@ -104,9 +106,10 @@ public enum PARSettings
 		(
 			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.AFTER_EQUALS)
 			.and(new SettingBool(FCPrinceAliRescue.SETTING, 100, true, Order.BEFORE))
-			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, false))
-			.and(new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
-					JOURNAL_STATUS.CONTAINS_STRING, true))
+			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, false)),
+			
+			new QuestJournalBool(FCPrinceAliRescue.QUEST_NAME, "I have duplicated a key, I need to get it from Leela", 
+					JOURNAL_STATUS.CONTAINS_STRING, true)
 		)
 	),
 	
@@ -116,10 +119,6 @@ public enum PARSettings
 		(
 			new SettingBool(FCPrinceAliRescue.SETTING, 20, true, Order.EQUALS)
 			.and(new InvBankBool(PARReqs.BRONZE_KEY, 1, TYPE.IN_ONE, true))
-			.and(new InvBankBool(PARReqs.PINK_SKIRT, 1, TYPE.IN_ONE, true))
-			.and(new InvBankBool(PARReqs.YELLOW_WIG, 1, TYPE.IN_ONE, true))
-			.and(new InvBankBool(PARReqs.PASTE, 1, TYPE.IN_ONE, true))
-			.and(new InvBankBool(PARReqs.ROPE, 1, TYPE.IN_ONE, true))
 		)
 	),
 	
@@ -187,8 +186,7 @@ public enum PARSettings
 	{
 		Arrays.stream(getBools())
 			.filter(b -> b instanceof QuestJournalBool)
-			.forEach(qjb -> ((QuestJournalBool)(qjb)).resetCache()
-		);
+			.forEach(qjb -> {((QuestJournalBool)(qjb)).resetCache();});
 	}
 	
 	public QuestBool[] getBools()

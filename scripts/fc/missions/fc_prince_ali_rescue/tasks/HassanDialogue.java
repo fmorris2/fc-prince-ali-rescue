@@ -21,6 +21,8 @@ public abstract class HassanDialogue extends Task
 		if(Player.getPosition().distanceTo(TILE) > RADIUS)
 			return Travel.webWalkTo(TILE, FCConditions.withinDistanceOfTile(TILE, RADIUS));
 		
-		return new NpcDialogue("Talk-to", "Hassan", 10, 0).execute();
+		NpcDialogue dialogue = new NpcDialogue("Talk-to", "Hassan", 10, 0);
+		dialogue.setCheckPath(true);
+		return dialogue.execute();
 	}
 }

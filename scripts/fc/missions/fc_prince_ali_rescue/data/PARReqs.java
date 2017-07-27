@@ -68,6 +68,7 @@ public class PARReqs extends ItemRequirement
 			(
 				new SettingBool(S, 100, true, Order.BEFORE)
 				.and(new CombatLevelBool(GetKeyPrint.COMBAT_THRESH, false))
+				.and(new InvBankBool(TROUT, 2, TYPE.IN_ONE, false))
 			),
 			
 			//KEY PRINT REQUIREMENTS
