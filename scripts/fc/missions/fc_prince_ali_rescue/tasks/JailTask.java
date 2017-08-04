@@ -2,22 +2,17 @@ package scripts.fc.missions.fc_prince_ali_rescue.tasks;
 
 import java.util.Arrays;
 
-import org.tribot.api.Clicking;
 import org.tribot.api.General;
 import org.tribot.api.Timing;
 import org.tribot.api.interfaces.Positionable;
 import org.tribot.api2007.Camera;
 import org.tribot.api2007.Combat;
 import org.tribot.api2007.Game;
-import org.tribot.api2007.GameTab;
-import org.tribot.api2007.Inventory;
 import org.tribot.api2007.NPCs;
 import org.tribot.api2007.Objects;
 import org.tribot.api2007.Player;
 import org.tribot.api2007.Walking;
 import org.tribot.api2007.WorldHopper;
-import org.tribot.api2007.GameTab.TABS;
-import org.tribot.api2007.types.RSItem;
 import org.tribot.api2007.types.RSObjectDefinition;
 import org.tribot.api2007.types.RSTile;
 
@@ -38,13 +33,10 @@ public abstract class JailTask extends Task
 	
 	private static final Positionable DOOR_TILE = new RSTile(3128, 3246, 0);
 	private static final int RADIUS = 10, MINIMAP_WALK_THRESH = 5;
-	private static final int HP_RATIO = General.random(50, 70);
 	
 	public boolean execute()
 	{
 		int dist = Player.getPosition().distanceTo(DOOR_TILE);
-		if(Combat.getHPRatio() < HP_RATIO && Inventory.getCount("Trout") > 0)
-			return eat();
 		if(dist > RADIUS || !isInBuilding())
 		{
 			Vars.get().addOrUpdate("daxWebRandomize", false);
@@ -86,19 +78,6 @@ public abstract class JailTask extends Task
 	{
 		General.println("Attempting to hop worlds...");
 		return FCInGameHopper.hop(WorldHopper.getRandomWorld(WorldHopper.isMembers(WorldHopper.getWorld())));
-	}
-	
-	private boolean eat()
-	{
-		General.println("Eating...");
-		if(!GameTab.open(TABS.INVENTORY))
-				return false;
-		RSItem[] trout = Inventory.find("Trout");
-		int invCount = Inventory.getAll().length;
-		if(trout.length > 0 && Clicking.click(trout[0]))
-			return Timing.waitCondition(FCConditions.inventoryChanged(invCount), 1200);
-		
-		return false;
 	}
 	
 	private boolean closeDoor()
