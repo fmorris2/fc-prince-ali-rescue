@@ -88,13 +88,8 @@ public class PARReqs extends ItemRequirement
 					JOURNAL_STATUS.CONTAINS_STRING, false))
 			),
 			
-			//BEER REQUIREMENTS
-			new SingleReqItem(BEER, 1, true, true).when
-			(
-				new SettingBool(S, 30, true, Order.BEFORE_EQUALS)
-			),
-			
-			new SingleReqItem(BEER, 2, true, true).when
+			//BEER REQUIREMENTS			
+			new SingleReqItem(BEER, 3, true, true).when
 			(
 				new SettingBool(S, 31, true, Order.BEFORE_EQUALS)
 			),
