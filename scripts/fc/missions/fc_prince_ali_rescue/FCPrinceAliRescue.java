@@ -81,4 +81,9 @@ public class FCPrinceAliRescue extends QuestScriptManager
 		return QUEST_NAME;
 	}
 
+	@Override
+	public int getQuestPointReward() {
+		return 3;
+	}
+
 }
