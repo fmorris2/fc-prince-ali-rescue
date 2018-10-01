@@ -16,6 +16,7 @@ import org.tribot.api2007.WorldHopper;
 import org.tribot.api2007.types.RSObjectDefinition;
 import org.tribot.api2007.types.RSTile;
 
+import scripts.dax_api.shared.helpers.BankHelper;
 import scripts.fc.api.generic.FCConditions;
 import scripts.fc.api.interaction.impl.objects.ClickObject;
 import scripts.fc.api.travel.Travel;
@@ -25,7 +26,6 @@ import scripts.fc.api.wrappers.FCTiming;
 import scripts.fc.framework.data.Vars;
 import scripts.fc.framework.task.Task;
 import scripts.fc.missions.fc_prince_ali_rescue.tasks.impl.GetKeyPrint;
-import scripts.webwalker_logic.shared.helpers.BankHelper;
 
 public abstract class JailTask extends Task
 {
@@ -34,9 +34,10 @@ public abstract class JailTask extends Task
 	private static final Positionable DOOR_TILE = new RSTile(3128, 3246, 0);
 	private static final int RADIUS = 10, MINIMAP_WALK_THRESH = 5;
 	
+	@Override
 	public boolean execute()
 	{
-		int dist = Player.getPosition().distanceTo(DOOR_TILE);
+		final int dist = Player.getPosition().distanceTo(DOOR_TILE);
 		if(dist > RADIUS || !isInBuilding())
 		{
 			Vars.get().addOrUpdate("daxWebRandomize", false);
@@ -90,8 +91,8 @@ public abstract class JailTask extends Task
 	{
 		return Arrays.stream(Objects.find(5, "Door")).anyMatch(d -> 
 		{
-			RSObjectDefinition def = d.getDefinition();
-			String[] actions = def == null ? null : def.getActions();
+			final RSObjectDefinition def = d.getDefinition();
+			final String[] actions = def == null ? null : def.getActions();
 			if(actions == null)
 				return false;
 			
@@ -101,7 +102,7 @@ public abstract class JailTask extends Task
 	
 	private boolean isInBuilding()
 	{
-		RSTile localTile = Player.getPosition().toLocalTile();
+		final RSTile localTile = Player.getPosition().toLocalTile();
 		return BankHelper.isInBuilding(localTile, Game.getSceneFlags());
 	}
 	
